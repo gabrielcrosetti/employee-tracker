@@ -12,6 +12,8 @@ This project serves as an employee management system and was made using Nodejs a
 
 ## Demo Video 
 
+https://watch.screencastify.com/v/tATzbkygddqOLjwB6t3l
+
 ## Code Snippet
 
 ## Installation
