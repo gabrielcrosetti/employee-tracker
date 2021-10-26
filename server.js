@@ -53,7 +53,7 @@ function init() {
         addDepartment()
           break;
         case "Add a role":
-          // execute function here
+        addRole()
           break;
         case "Add an employee":
           // execute function here
@@ -133,6 +133,53 @@ function addDepartment() {
 }
 
 // To add a role
+
+function addRole() {
+    db.query('SELECT * FROM department', (err, res) => {
+        if (err) {
+            throw err
+        }
+    inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "role",
+        message: "What will be the new role?",
+      },
+      {
+        type: "input",
+        name: "salary",
+        message: "What will be the salary for this new role?",
+      },
+      {
+        type: "list",
+        name: "department_id",
+        message: "What department will this new role work in?",
+        choices: res.map(department => department.name)
+      },
+    ])
+    .then((response) => {
+        const chosenDepartment = res.find(department => department.name === response.department_id)
+      db.query(
+        "INSERT INTO role SET ?",
+        {
+          title: response.role,
+          salary: response.salary,
+          department_id: chosenDepartment.id,
+        },
+        (err, res) => {
+          if (err) {
+            throw err;
+          }
+          console.log("Success! You just added a new role!");
+          init();
+        }
+      );
+    });
+ })
+}
+
+
 
 // To add an employee
 
