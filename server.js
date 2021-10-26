@@ -59,7 +59,7 @@ function init() {
           addEmployee();
           break;
         case "Update an employee role":
-          // execute function here
+          updateRole();
           break;
         case "Quit":
           db.end();
@@ -266,3 +266,57 @@ function addEmployee() {
 }
 
 // To update an employee role
+function updateRole() {
+  db.query("SELECT * FROM employee", function (err, results) {
+    if (err) throw err;
+    inquirer
+      .prompt([
+        {
+          name: "updatedRole",
+          type: "list",
+          message: "Choose which employee's role you would like to update.",
+          choices: results.map((item) => item.first_name),
+        },
+      ])
+      .then((answer) => {
+        const updatedEmployee = answer.updatedRole;
+        db.query("SELECT * FROM role", function (err, results) {
+          if (err) throw err;
+          inquirer
+            .prompt([
+              {
+                name: "role_id",
+                type: "list",
+                message: "Select the employee's new role.",
+                choices: results.map((item) => item.title),
+              },
+            ])
+            .then((answer) => {
+              const roleChosen = results.find(
+                (item) => item.title === answer.role_id
+              );
+              db.query(
+                "UPDATE employee SET ? WHERE first_name = " +
+                  "'" +
+                  updatedEmployee +
+                  "'",
+                {
+                  role_id: "" + roleChosen.id + "",
+                },
+                function (err) {
+                  if (err) throw err;
+                  console.log(
+                    " \n Success! You updated " +
+                      updatedEmployee +
+                      "'s role to " +
+                      answer.role_id +
+                      "! \n"
+                  );
+                  init();
+                }
+              );
+            });
+        });
+      });
+  });
+}
