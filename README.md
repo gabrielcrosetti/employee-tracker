@@ -16,6 +16,8 @@ https://watch.screencastify.com/v/tATzbkygddqOLjwB6t3l
 
 ## Code Snippet
 
+<img width="725" alt="Screen Shot 2021-10-26 at 3 31 08 AM" src="https://user-images.githubusercontent.com/89226867/138829541-7cf03411-8753-4eb9-8751-d48b7224b9c2.png">
+
 ## Installation
 
 1) Be sure to have MySQL server downloaded and running
@@ -33,4 +35,8 @@ https://watch.screencastify.com/v/tATzbkygddqOLjwB6t3l
 7) You are done!
 
 ## Acknowledgements
+
+* W3 Schools
+* nodejs.org
+* npmjs.com
 
